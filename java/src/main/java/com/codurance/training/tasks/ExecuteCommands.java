@@ -23,6 +23,9 @@ public class ExecuteCommands {
             case "today":
                 new ShowTodayDeadlineTasks().show(taskList.out,taskList.tasks);
                 break;
+            case "delete":
+                new DeleteTask().delete(commandRest[1],taskList.out,taskList.tasks);
+                break;
             case "help":
                 new Help().help(taskList.out);
                 break;
