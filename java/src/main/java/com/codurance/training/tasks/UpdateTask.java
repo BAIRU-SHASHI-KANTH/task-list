@@ -5,7 +5,13 @@ import java.util.List;
 import java.util.Map;
 
 public class UpdateTask {
-    public void setDone(String idString, boolean done, PrintWriter out,Map<String, List<Task>> tasks) {
+    private final Map<String, List<Task>> tasks;
+    private final PrintWriter out;
+    public UpdateTask(Map<String, List<Task>> tasks, PrintWriter out){
+        this.tasks = tasks;
+        this.out = out;
+    }
+    public void setDone(String idString, boolean done) {
         int id = Integer.parseInt(idString);
         for (Map.Entry<String, List<Task>> project : tasks.entrySet()) {
             for (Task task : project.getValue()) {

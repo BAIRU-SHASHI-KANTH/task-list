@@ -1,9 +1,15 @@
 package com.codurance.training.tasks;
 
 import java.util.ArrayList;
-public class AddProject {
+import java.util.List;
+import java.util.Map;
 
-    public void add(String name,TaskList taskList) {
-        taskList.tasks.put(name, new ArrayList<Task>());
+public class AddProject implements AddCommand{
+    private final Map<String, List<Task>> tasks;
+    public AddProject(Map<String, List<Task>> tasks){
+        this.tasks = tasks;
+    }
+    public void add(String name) {
+        tasks.put(name, new ArrayList<Task>());
     }
 }

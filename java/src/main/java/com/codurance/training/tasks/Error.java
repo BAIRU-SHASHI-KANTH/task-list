@@ -3,7 +3,11 @@ package com.codurance.training.tasks;
 import java.io.PrintWriter;
 
 public class Error {
-    public void error(String command, PrintWriter out) {
+    private final PrintWriter out;
+    public Error(PrintWriter out) {
+        this.out = out;
+    }
+    public void error(String command) {
         out.printf("I don't know what the command \"%s\" is.", command);
         out.println();
     }

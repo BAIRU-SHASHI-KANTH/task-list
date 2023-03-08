@@ -4,8 +4,16 @@ import java.io.PrintWriter;
 import java.util.List;
 import java.util.Map;
 
-public class DeleteTask {
-    public void delete(String idString, PrintWriter out, Map<String, List<Task>> tasks) {
+public class DeleteTask implements DeleteCommand{
+
+    private final Map<String, List<Task>> tasks;
+    private final PrintWriter out;
+
+    public DeleteTask(Map<String, List<Task>> tasks, PrintWriter out){
+        this.tasks = tasks;
+        this.out = out;
+    }
+    public void delete(String idString) {
         long id = Long.parseLong(idString);
         for (Map.Entry<String, List<Task>> project : tasks.entrySet()) {
             for (Task task : project.getValue()) {

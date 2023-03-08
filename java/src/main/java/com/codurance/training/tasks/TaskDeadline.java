@@ -4,8 +4,14 @@ import java.io.PrintWriter;
 import java.util.List;
 import java.util.Map;
 
-public class TaskDeadline {
-    public void setDeadline(String commandLine, PrintWriter out, Map<String, List<Task>> tasks) {
+public class TaskDeadline implements Deadline {
+    private final Map<String, List<Task>> tasks;
+    private final PrintWriter out;
+    public TaskDeadline(Map<String, List<Task>> tasks, PrintWriter out){
+        this.tasks = tasks;
+        this.out = out;
+    }
+    public void setDeadline(String commandLine) {
 
         String[] subcommandRest = commandLine.split(" ", 2);
         String subcommand = subcommandRest[0];

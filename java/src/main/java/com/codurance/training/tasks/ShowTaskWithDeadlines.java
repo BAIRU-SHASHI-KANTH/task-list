@@ -6,8 +6,14 @@ import java.io.PrintWriter;
         import java.util.Map;
 
 public class ShowTaskWithDeadlines implements Show{
+    private final Map<String, List<Task>> tasks;
+    private final PrintWriter out;
+    public ShowTaskWithDeadlines(Map<String, List<Task>> tasks, PrintWriter out){
+        this.tasks = tasks;
+        this.out = out;
+    }
     @Override
-    public void show(PrintWriter out, Map<String, List<Task>> tasks) {
+    public void show() {
         for (Map.Entry<String, List<Task>> project : tasks.entrySet()) {
             out.println(project.getKey());
             for (Task task : project.getValue()) {

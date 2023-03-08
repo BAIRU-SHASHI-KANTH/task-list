@@ -6,21 +6,26 @@ import java.util.Map;
 
 public class ShowFactory {
 
+    public Show show;
+    public final ShowTasks showTasks;
+    public final ShowTaskWithDeadlines showTaskWithDeadlines;
+    public ShowFactory(Map<String, List<Task>> tasks, PrintWriter out){
+        showTasks = new ShowTasks(tasks,out);
+        showTaskWithDeadlines = new ShowTaskWithDeadlines(tasks,out);
+    }
     public Show get(String commandRest){
-
-        Show show = null;
 
         switch (commandRest){
             case "by project":
-                show = new ShowTasks();
+                show = showTasks;
                 break;
             case "by deadline":
-                show = new ShowTaskWithDeadlines();
+                show = showTaskWithDeadlines;
                 break;
             default:
                 break;
         }
 
-        return show;
+        return this.show;
     }
 }

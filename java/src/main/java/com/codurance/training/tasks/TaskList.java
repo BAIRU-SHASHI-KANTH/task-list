@@ -16,10 +16,9 @@ import java.util.Calendar;
 
 public final class TaskList implements Runnable {
     private static final String QUIT = "quit";
-
-    public final Map<String, List<Task>> tasks = new LinkedHashMap<>();
+    private final Map<String, List<Task>> tasks = new LinkedHashMap<>();
     private final BufferedReader in;
-    public final PrintWriter out;
+    private final PrintWriter out;
     private long lastId = 0;
     public TaskList(BufferedReader reader, PrintWriter writer) {
         this.in = reader;
@@ -44,23 +43,9 @@ public final class TaskList implements Runnable {
     }
 
     private void execute(String commandLine) {
-        ExecuteCommands executeCommand= new ExecuteCommands();
-        executeCommand.execute(commandLine,this);
+        ExecuteCommands executeCommand= new ExecuteCommands(this,this.tasks,this.out);
+        executeCommand.execute(commandLine);
     }
-
-
-
-    public void add(String commandLine) {
-        String[] subcommandRest = commandLine.split(" ", 2);
-        String subcommand = subcommandRest[0];
-        if (subcommand.equals("project")) {
-            new AddProject().add(subcommandRest[1],this);
-        } else if (subcommand.equals("task")) {
-            String[] projectTask = subcommandRest[1].split(" ", 2);
-            new AddTask().add(projectTask[0], projectTask[1],this);
-        }
-    }
-
 
     public long nextId() {
         return ++lastId;
